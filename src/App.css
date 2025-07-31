@@ -22,13 +22,53 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background: linear-gradient(135deg, #0066cc, #0099ff);
   position: relative;
   overflow: hidden;
   padding: 20px;
 }
 
-/* Wave background effect */
+.wave-background {
+  position: absolute;
+  top: -5%;
+  left: -5%;
+  width: 110%;
+  height: 110%;
+  background-image: url('/background.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  z-index: 0;
+  animation: wave-motion 20s infinite alternate ease-in-out;
+  transform-origin: center;
+}
+
+.wave-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: transparent;
+  z-index: 0;
+  opacity: 0.3;
+  filter: url('#wave-filter');
+  animation: wave-filter 15s infinite linear;
+  pointer-events: none;
+}
+
+@keyframes wave-filter {
+  0% {
+    filter: url('#wave-filter') blur(0px);
+  }
+  50% {
+    filter: url('#wave-filter') blur(0.5px);
+  }
+  100% {
+    filter: url('#wave-filter') blur(0px);
+  }
+}
+
+/* Overlay effect for background image */
 .container::before {
   content: '';
   position: absolute;
@@ -36,16 +76,32 @@ body {
   left: 0;
   right: 0;
   bottom: 0;
-  background: repeating-radial-gradient(
-    ellipse at center,
-    rgba(0, 102, 204, 0.1) 0%,
-    rgba(0, 120, 230, 0.2) 10%,
-    rgba(0, 102, 204, 0.1) 20%
-  );
-  background-size: 200% 200%;
-  animation: wave 15s ease-in-out infinite;
+  background: rgba(0, 102, 204, 0.3);
   z-index: 1;
   pointer-events: none;
+}
+
+@keyframes wave-motion {
+  0% {
+    transform: scale(1.05) translate(0, 0) rotate(0deg);
+    filter: brightness(1);
+  }
+  25% {
+    transform: scale(1.08) translate(-5px, 5px) rotate(0.3deg);
+    filter: brightness(1.05);
+  }
+  50% {
+    transform: scale(1.06) translate(0, -5px) rotate(0deg);
+    filter: brightness(1);
+  }
+  75% {
+    transform: scale(1.08) translate(5px, 5px) rotate(-0.3deg);
+    filter: brightness(1.05);
+  }
+  100% {
+    transform: scale(1.05) translate(0, 0) rotate(0deg);
+    filter: brightness(1);
+  }
 }
 
 @keyframes wave {
@@ -114,21 +170,6 @@ body {
 
 .tagline {
   color: white;
-  font-size: 2.4rem;
-  text-transform: lowercase;
-  letter-spacing: 3px;
-  margin-bottom: 15px;
-  font-weight: 600;
-  text-shadow: 0 0 15px rgba(0, 102, 204, 0.7);
-  position: relative;
-  overflow: hidden;
-  background: rgba(255, 255, 255, 0.15);
-  border-radius: 5px;
-  padding: 5px 15px;
-}
-
-.coming-soon {
-  color: white;
   font-size: 1.4rem;
   opacity: 0.9;
   font-weight: 300;
@@ -139,6 +180,24 @@ body {
   background: rgba(255, 255, 255, 0.1);
   border-radius: 4px;
   padding: 5px 15px;
+  margin-top: 70px;
+  
+}
+
+.coming-soon {
+  color: white;
+  font-size: 2.4rem;
+  text-transform:none;
+  letter-spacing: 3px;
+  margin-bottom: 15px;
+  font-weight: 600;
+  text-shadow: 0 0 15px rgba(0, 102, 204, 0.7);
+  position: relative;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 5px;
+  padding: 5px 15px;
+  
 }
 
 .placeholder {
@@ -174,6 +233,8 @@ body {
   background: rgba(0, 102, 204, 0.1);
   border-radius: 8px;
   box-shadow: 0 0 15px rgba(0, 102, 204, 0.2);
+  position: relative;
+  overflow: hidden;
 }
 
 .website-link a {
@@ -205,4 +266,108 @@ body {
 .website-link a:hover::after {
   transform: scaleX(1);
   transform-origin: bottom left;
+}
+
+/* Responsive styles for different screen sizes */
+@media screen and (max-width: 1024px) {
+  .site-title {
+    font-size: 2.5rem;
+  }
+  
+  .tagline {
+    font-size: 2.2rem;
+  }
+  
+  .coming-soon {
+    font-size: 1.3rem;
+  }
+  
+  .logo-wrapper {
+    width: 180px;
+    height: 180px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .site-title {
+    font-size: 2.2rem;
+    margin-bottom: 30px;
+  }
+  
+  .tagline {
+    font-size: 1.8rem;
+  }
+  
+  .coming-soon {
+    font-size: 1.2rem;
+    margin-top: 50px;
+  }
+  
+  .website-link {
+    font-size: 1.1rem;
+  }
+  
+  .logo-wrapper {
+    width: 150px;
+    height: 150px;
+    margin-bottom: 40px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .container {
+    padding: 15px;
+  }
+  
+  .site-title {
+    font-size: 1.8rem;
+    margin-bottom: 20px;
+    padding: 5px 10px;
+  }
+  
+  .tagline {
+    font-size: 1.5rem;
+    padding: 4px 10px;
+    letter-spacing: 2px;
+  }
+  
+  .coming-soon {
+    font-size: 1.1rem;
+    margin-top: 40px;
+    letter-spacing: 2px;
+  }
+  
+  .website-link {
+    font-size: 1rem;
+    padding: 4px 10px;
+  }
+  
+  .logo-wrapper {
+    width: 120px;
+    height: 120px;
+    margin-bottom: 30px;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .site-title {
+    font-size: 1.5rem;
+  }
+  
+  .tagline {
+    font-size: 1.3rem;
+    letter-spacing: 1px;
+  }
+  
+  .coming-soon {
+    font-size: 1rem;
+    letter-spacing: 1px;
+    margin-top: 30px;
+  }
+  
+  .logo-wrapper {
+    width: 100px;
+    height: 100px;
+    margin-bottom: 20px;
+  }
 }
