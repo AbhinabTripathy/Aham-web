@@ -21,7 +21,7 @@ function App() {
           </div>
         </div>
         <div className="text-container">
-          <h2 className="coming-soon placeholder"> Coming Soon...... </h2>
+          <h2 className="coming-soon placeholder"> Coming Soon</h2>
           
         <p className="website-link placeholder">Explore courses, <a href="https://aham-mu.vercel.app/" target="_blank" rel="noopener noreferrer">Click Here</a></p>
           <p className="tagline placeholder">new creator era</p>
